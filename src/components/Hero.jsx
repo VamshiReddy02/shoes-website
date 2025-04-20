@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { HeadphoneData } from '../data/MockData'
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
-import {motion, AnimatePresence, easeIn} from 'framer-motion'
+import {motion, AnimatePresence, easeIn, easeInOut} from 'framer-motion'
 import { SlideRight } from '../utils/animation'
 
 const Hero = () => {
@@ -23,7 +23,11 @@ const Hero = () => {
   },[curretIndex])
 
   return (
-    <section className='bg-red-400 text-white'>
+    <motion.section 
+      initial={{ backgroundImage: `radial-gradient(circle, ${ activeData.bgColor } 0%, ${activeData.bgColor } 0%)` }}
+      animate={{ backgroundImage: `radial-gradient(circle, ${ activeData.bgColor } 0%, ${activeData.bgColor } 70%)`  }}
+      transition={{ duration: 0.8 }}
+      className='text-white'>
         <Navbar />
         <div className="container grid grid-cols-1 md:grid-cols-2 h-screen md:h-[700px] relative">
            {/*Info*/}
@@ -38,8 +42,22 @@ const Hero = () => {
                     exit="exit"
                     className='text-3xl lg:text-4xl xl:text-5xl font-bold'>{activeData.title}</motion.h1>
                 </AnimatePresence>
-                <p className='text-sm leading-loose text-white/80'>{activeData.subtitle}</p>
-                <p className='text-3xl lg:text-4xl xl:text-5xl font-bold'>{activeData.price}</p>
+                <AnimatePresence mode="wait">
+                <motion.p 
+                  key={activeData.id}
+                  variants={SlideRight(0.4)}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  className='text-sm leading-loose text-white/80'>{activeData.subtitle}</motion.p>
+                </AnimatePresence>
+                <motion.p 
+                  key={activeData.id}
+                  variants={SlideRight(0.6)}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  className='text-3xl lg:text-4xl xl:text-5xl font-bold'>{activeData.price}</motion.p>
                 <div className='flex items-center justify-center md:justify-start gap-4 text-3xl'>
                   <FaInstagram className='cursor-pointer border rounded-full p-[6px]' />
                   <FaFacebook className='cursor-pointer border rounded-full p-[6px]' />
@@ -49,11 +67,27 @@ const Hero = () => {
            </div>
            {/*Image*/}
            <div className='flex flex-col items-center justify-center order-1 md:order-2 relative'>
-              <img src={activeData.image} atl=""  className='w-[300px] md:w-[400px] xl:w-[500px] relative z-10'/>
-              <div className='text-[300px] absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 font-poppins font-extrabold'>{activeData.modal}</div>
+           <AnimatePresence mode="wait">
+              <motion.img 
+                key={activeData.id}
+                initial={{opacity:0, x:100}}
+                animate= {{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, ease: easeInOut, delay: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                src={activeData.image} atl=""  className='w-[300px] md:w-[400px] xl:w-[500px] relative z-10'/>
+            </AnimatePresence>
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeData.id}
+                initial={{opacity:0}}
+                animate= {{ opacity: 1 }}
+                transition={{ duration: 0.4, ease: easeInOut, delay: 0 }}
+                exit={{ opacity: 0 }}
+                className='text-[300px] absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 font-poppins font-extrabold'>{activeData.modal}</motion.div>
+              </AnimatePresence>
            </div>
         </div>
-    </section>
+    </motion.section>
   ) 
 }
 
