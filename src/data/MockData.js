@@ -36,6 +36,10 @@ export const HeadphoneData = [
     price: "$40.99",
     modal: "AirPods",
     bgColor: "#e85950",
+    modalPath: "/assets/nike_air_jordan.glb",
+    scale: 0.3,
+    position: [0.4, 0, 0],
+    rotation: [0, Math.PI / 4, 0]
   },
   {
     id: 2,
@@ -46,7 +50,11 @@ export const HeadphoneData = [
     price: "$100.00",
     modal: "Max",
     bgColor: "#24b4bc",
-    bgImage: "linear-gradient(45deg, red 50%, black 50%)"
+    bgImage: "linear-gradient(45deg, red 50%, black 50%)",
+    modalPath: "/assets/nike_air_zoom_pegasus_36.glb",
+    scale: 1.2,
+    position: [0, 0, 0],
+    rotation: [0.5, Math.PI / 2, 0]
   },
   {
     id: 3,
@@ -57,5 +65,9 @@ export const HeadphoneData = [
     price: "$100.00",
     modal: "Pro",
     bgColor: "#7aa10e",
+    modalPath: "/assets/nike_tc_7900_sail.glb",
+    scale: 3,
+    position: [0, 0, 0],
+    rotation: [0, Math.PI / 2, 0]
   },
 ];

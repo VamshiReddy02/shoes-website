@@ -4,6 +4,10 @@ import { HeadphoneData } from '../data/MockData'
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import {motion, AnimatePresence, easeIn, easeInOut} from 'framer-motion'
 import { SlideRight } from '../utils/animation'
+import ShoesModel from './ShoesModel'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import DynamicModel from './ShoesModel'
 
 const Hero = () => {
 
@@ -76,7 +80,7 @@ const Hero = () => {
            </div>
            {/*Image*/}
            <div className='flex flex-col items-center justify-center order-1 md:order-2 relative'>
-           <AnimatePresence mode="wait">
+           {/* <AnimatePresence mode="wait">
               <motion.img 
                 key={activeData.id}
                 initial={{opacity:0, x:100}}
@@ -84,7 +88,20 @@ const Hero = () => {
                 transition={{ duration: 0.4, ease: easeInOut, delay: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 src={activeData.image} atl=""  className='w-[300px] md:w-[400px] xl:w-[500px] relative z-10'/>
-            </AnimatePresence>
+            </AnimatePresence> */}
+            <div className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] xl:w-[600px] xl:h-[600px] relative z-10">
+              <Canvas camera={{ position: [0, 0, 2] }}>
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[0, 0, 5]} />
+                <DynamicModel 
+                  path={activeData.modalPath}
+                  scale={activeData.scale} 
+                  position={activeData.position} 
+                  rotation={activeData.rotation}
+                />
+                <OrbitControls enableZoom={false} />
+              </Canvas>
+            </div>
             <AnimatePresence mode="wait">
               <motion.div 
                 key={activeData.id}
