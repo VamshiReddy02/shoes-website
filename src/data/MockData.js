@@ -46,6 +46,7 @@ export const HeadphoneData = [
     price: "$100.00",
     modal: "Max",
     bgColor: "#24b4bc",
+    bgImage: "linear-gradient(45deg, red 50%, black 50%)"
   },
   {
     id: 3,

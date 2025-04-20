@@ -23,11 +23,20 @@ const Hero = () => {
   },[curretIndex])
 
   return (
-    <motion.section 
-      initial={{ backgroundImage: `radial-gradient(circle, ${ activeData.bgColor } 0%, ${activeData.bgColor } 0%)` }}
-      animate={{ backgroundImage: `radial-gradient(circle, ${ activeData.bgColor } 0%, ${activeData.bgColor } 70%)`  }}
-      transition={{ duration: 0.8 }}
-      className='text-white'>
+      <motion.section 
+        initial={{
+          backgroundImage: activeData.bgImage 
+            ? activeData.bgImage
+            : `radial-gradient(circle, ${activeData.bgColor} 0%, ${activeData.bgColor} 0%)`
+        }}
+        animate={{
+          backgroundImage: activeData.bgImage 
+            ? activeData.bgImage
+            : `radial-gradient(circle, ${activeData.bgColor} 0%, ${activeData.bgColor} 70%)`
+        }}
+        transition={{ duration: 0.8 }}
+        className="text-white"
+      >
         <Navbar />
         <div className="container grid grid-cols-1 md:grid-cols-2 h-screen md:h-[700px] relative">
            {/*Info*/}
