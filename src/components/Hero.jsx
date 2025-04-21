@@ -79,15 +79,6 @@ const Hero = () => {
            </div>
            {/*Image*/}
            <div className='flex flex-col items-center justify-center order-1 md:order-2 relative'>
-           {/* <AnimatePresence mode="wait">
-              <motion.img 
-                key={activeData.id}
-                initial={{opacity:0, x:100}}
-                animate= {{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, ease: easeInOut, delay: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                src={activeData.image} atl=""  className='w-[300px] md:w-[400px] xl:w-[500px] relative z-10'/>
-            </AnimatePresence> */}
             <div className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] xl:w-[600px] xl:h-[600px] relative z-10">
               <motion.div
                 key={activeData.id}
