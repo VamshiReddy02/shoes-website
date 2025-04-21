@@ -2,13 +2,14 @@ import React from 'react'
 import { MdMenu } from "react-icons/md"
 import { FaApple, FaRegUser } from "react-icons/fa"
 import { NavbarData } from '../data/MockData'
+import { SiNike } from "react-icons/si"
 
 const Navbar = () => {
   return (
     <nav className='text-white py-5'>
         <div className="container flex justify-between items-center">
             <div className='flex items-center gap-2 text-3xl font-semibold'>
-                <FaApple />
+                <SiNike />
                 MAX Shoes
             </div>
             <div className='hidden md:block'>

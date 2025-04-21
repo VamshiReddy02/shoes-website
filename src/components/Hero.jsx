@@ -4,7 +4,6 @@ import { HeadphoneData } from '../data/MockData'
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import {motion, AnimatePresence, easeIn, easeInOut} from 'framer-motion'
 import { SlideRight } from '../utils/animation'
-import ShoesModel from './ShoesModel'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import DynamicModel from './ShoesModel'
@@ -17,7 +16,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % HeadphoneData.length)
-    }, 3000)
+    }, 8000)
 
     return () => clearInterval(interval)
   }, [curretIndex])
@@ -39,7 +38,7 @@ const Hero = () => {
             : `radial-gradient(circle, ${activeData.bgColor} 0%, ${activeData.bgColor} 70%)`
         }}
         transition={{ duration: 0.8 }}
-        className="text-white"
+        className="text-white overflow-x-hidden"
       >
         <Navbar />
         <div className="container grid grid-cols-1 md:grid-cols-2 h-screen md:h-[700px] relative">
@@ -90,18 +89,28 @@ const Hero = () => {
                 src={activeData.image} atl=""  className='w-[300px] md:w-[400px] xl:w-[500px] relative z-10'/>
             </AnimatePresence> */}
             <div className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] xl:w-[600px] xl:h-[600px] relative z-10">
-              <Canvas camera={{ position: [0, 0, 2] }}>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[0, 0, 5]} />
-                <DynamicModel 
-                  path={activeData.modalPath}
-                  scale={activeData.scale} 
-                  position={activeData.position} 
-                  rotation={activeData.rotation}
-                />
-                <OrbitControls enableZoom={false} />
-              </Canvas>
+              <motion.div
+                key={activeData.id}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.4, ease: easeInOut, delay: 0 }}
+                className="w-full h-full"
+              >
+                <Canvas camera={{ position: [0, 0, 2] }}>
+                  <ambientLight intensity={0.5} />
+                  <directionalLight position={[5, 5, 5]} intensity={1.5} />
+                  <DynamicModel 
+                    path={activeData.modalPath}
+                    scale={activeData.scale}
+                    position={activeData.position}
+                    rotation={activeData.rotation}
+                  />
+                  <OrbitControls enableZoom={false} />
+                </Canvas>
+              </motion.div>
             </div>
+
             <AnimatePresence mode="wait">
               <motion.div 
                 key={activeData.id}
@@ -109,7 +118,7 @@ const Hero = () => {
                 animate= {{ opacity: 1 }}
                 transition={{ duration: 0.4, ease: easeInOut, delay: 0 }}
                 exit={{ opacity: 0 }}
-                className='text-[300px] absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 font-poppins font-extrabold'>{activeData.modal}</motion.div>
+                className='text-[300px] absolute bottom-0 mt-8 left-1/2 -translate-x-1/2 text-white/5 font-poppins font-extrabold z-0'>{activeData.modal}</motion.div>
               </AnimatePresence>
            </div>
         </div>
