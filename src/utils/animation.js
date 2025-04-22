@@ -1,4 +1,4 @@
-import { easeIn, easeInOut } from "framer-motion"
+import { easeInOut } from "framer-motion"
 
 export const SlideRight = (delay) => {
     return {
